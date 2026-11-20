@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aerolume · Assistant dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--card:#fff;--ink:#1F1A16;--muted:#776B60;--line:#E9E2D8;--copper:#B5652B;--green:#2F4A3A}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,sans-serif}
+.top{background:var(--ink);color:#fff;padding:18px 32px;display:flex;align-items:center;gap:14px}
+.top b{font-size:16px}.top span{color:#C9BFB4;font-size:13px}.top a{margin-left:auto;color:#C9BFB4;font-size:13px;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 32px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.kpi small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.kpi b{display:block;font-size:30px;margin-top:4px;letter-spacing:-.02em}
+.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.panel h3{margin:0;padding:16px 20px;border-bottom:1px solid var(--line);font-size:14px;display:flex;justify-content:space-between}
+.panel h3 span{color:var(--muted);font-weight:500}
+table{width:100%;border-collapse:collapse}td,th{padding:11px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;background:#FCFAF7}
+tr:last-child td{border-bottom:0}
+.tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:#FBEDE3;color:#A2531F;text-transform:uppercase;letter-spacing:.05em}
+.conv{padding:14px 20px;border-bottom:1px solid var(--line)}.conv:last-child{border:0}
+.conv .q{font-weight:600}.conv .a{color:var(--muted);margin-top:3px;white-space:pre-wrap}.conv small{color:#A79B8F}
+.empty{padding:22px 20px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="top"><b>Aerolume · AI assistant dashboard</b><span>leads, hand-offs and conversations from the chat widget</span><a href="/">← back to store</a></div>
+<div class="wrap">
+  <div class="kpis"><div class="kpi"><small>Conversations</small><b id="k1">0</b></div><div class="kpi"><small>Leads captured</small><b id="k2">0</b></div>
+    <div class="kpi"><small>Tickets for humans</small><b id="k3">0</b></div><div class="kpi"><small>Resolved by AI</small><b id="k4">-</b></div></div>
+  <div class="cols">
+    <div>
+      <div class="panel"><h3>Leads <span>also sent to Google Sheets / CRM in production</span></h3><table id="leads"></table></div>
+      <div class="panel"><h3>Tickets <span>hand-offs to the support team</span></h3><table id="tickets"></table></div>
+    </div>
+    <div class="panel"><h3>Latest conversations <span>last 40</span></h3><div id="conv"></div></div>
+  </div>
+</div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function load(){const d=await (await fetch('/api/admin')).json();
+  const sessions=new Set(d.conversations.map(c=>c.session));
+  k1.textContent=sessions.size; k2.textContent=d.leads.length; k3.textContent=d.tickets.length;
+  k4.textContent=sessions.size?Math.round(100*Math.max(0,sessions.size-d.tickets.length)/sessions.size)+'%':'-';
+  leads.innerHTML=d.leads.length?'<tr><th>Time</th><th>Name</th><th>Email</th><th>Interest</th><th>Budget</th></tr>'+d.leads.map(l=>`<tr><td>${esc(l.time)}</td><td>${esc(l.name)}</td><td>${esc(l.email)}</td><td>${esc(l.interest)}</td><td>${esc(l.budget)}</td></tr>`).join(''):'<tr><td class="empty">No leads yet.</td></tr>';
+  tickets.innerHTML=d.tickets.length?'<tr><th>Ticket</th><th>Time</th><th>Reason</th><th>Email</th><th></th></tr>'+d.tickets.map(t=>`<tr><td><b>${esc(t.id)}</b></td><td>${esc(t.time)}</td><td>${esc(t.reason)}<br><small style="color:#776B60">${esc(t.summary)}</small></td><td>${esc(t.email)}</td><td><span class="tag">${esc(t.status)}</span></td></tr>`).join(''):'<tr><td class="empty">No tickets yet.</td></tr>';
+  conv.innerHTML=d.conversations.length?d.conversations.map(c=>`<div class="conv"><small>${esc(c.time)}</small><div class="q">${esc(c.user)}</div><div class="a">${esc(c.assistant.replace(/\*\*/g,"").slice(0,320))}</div></div>`).join(''):'<div class="empty">No conversations yet.</div>';
+}
+load(); setInterval(load,5000);
+</script>
+</body>
+</html>

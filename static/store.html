@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aerolume · Coffee gear for home baristas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F6F1EA;--paper:#FFFDF9;--ink:#1F1A16;--muted:#776B60;--line:#E6DCCF;--copper:#B5652B;--copper2:#D98A4E;--green:#2F4A3A;--r:16px}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.serif{font-family:Fraunces,Georgia,serif}
+header{position:sticky;top:0;z-index:5;background:rgba(246,241,234,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1200px;margin:0 auto;height:68px;display:flex;align-items:center;gap:36px;padding:0 28px}
+.logo{font-family:Fraunces,serif;font-size:24px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo i{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--copper2),var(--copper) 60%,#7A3E14);display:inline-block}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px}.nav a:hover{color:var(--ink)}
+.cart{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--paper)}
+.cart b{min-width:20px;height:20px;border-radius:10px;background:var(--ink);color:#fff;font-size:11px;display:grid;place-items:center;padding:0 5px}
+.hero{max-width:1200px;margin:0 auto;padding:64px 28px 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-family:Fraunces,serif;font-size:58px;line-height:1.02;letter-spacing:-.03em;margin:0 0 18px;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--copper)}
+.hero p{font-size:18px;color:var(--muted);max-width:480px;margin:0 0 26px}
+.cta{display:inline-flex;gap:10px;align-items:center;background:var(--ink);color:#fff;padding:14px 22px;border-radius:99px;font-weight:600}
+.ghost{margin-left:10px;padding:14px 18px;border-radius:99px;border:1px solid var(--line);font-weight:500}
+.hero-art{aspect-ratio:1.05;border-radius:28px;background:radial-gradient(120% 90% at 30% 20%,#E9D7C2,#D7B898 45%,#B98A63);position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(80,45,15,.18)}
+.hero-art{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;background:none;box-shadow:none;aspect-ratio:auto}
+.ha{border-radius:22px;aspect-ratio:1;display:grid;place-items:center;position:relative;box-shadow:0 18px 50px rgba(80,45,15,.12)}
+.ha svg{width:44%;height:44%}
+.ha span{position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:600;color:#4A2F1C;background:rgba(255,253,249,.75);padding:4px 10px;border-radius:99px}
+.chips{max-width:1200px;margin:0 auto;padding:0 28px 18px;display:flex;gap:10px;flex-wrap:wrap}
+.chip{padding:8px 15px;border-radius:99px;border:1px solid var(--line);background:var(--paper);font-size:13.5px;color:var(--muted)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{max-width:1200px;margin:0 auto;padding:6px 28px 80px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(80,45,15,.10)}
+.art{aspect-ratio:1.25;display:grid;place-items:center}
+.art svg{width:46%;height:56%}
+.card .c{padding:14px 16px 16px}
+.card .cat{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card h3{margin:4px 0 6px;font-size:15px;font-weight:600;line-height:1.3}
+.row{display:flex;justify-content:space-between;align-items:center}
+.price{font-weight:700}.stars{font-size:12.5px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:30px 28px;text-align:center;color:var(--muted);font-size:13px}
+/* ---------------------------------------------------------------- widget */
+.launcher{position:fixed;right:26px;bottom:26px;z-index:20;display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;padding:10px 20px 10px 10px;border-radius:99px;box-shadow:0 14px 40px rgba(31,26,22,.35);font-weight:600;transition:.2s}
+.launcher:hover{transform:translateY(-2px)}
+.launcher .av{width:38px;height:38px}
+.av{border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--copper2),var(--copper) 60%,#7A3E14);display:grid;place-items:center;flex:none}
+.av svg{width:56%;height:56%}
+.launcher .ping{position:absolute;left:38px;top:9px;width:11px;height:11px;border-radius:50%;background:#5BD68A;border:2px solid var(--ink)}
+.widget{position:fixed;right:26px;bottom:26px;z-index:21;width:412px;height:min(690px,calc(100vh - 52px));background:var(--paper);border-radius:22px;box-shadow:0 30px 90px rgba(31,26,22,.30);display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:.25s cubic-bezier(.2,.8,.2,1);transform-origin:bottom right}
+.widget.open{transform:none;opacity:1;pointer-events:auto}
+.wh{background:var(--ink);color:#fff;padding:16px 16px 16px 18px;display:flex;gap:12px;align-items:center}
+.wh .av{width:40px;height:40px}
+.wh b{display:block;font-size:15px}.wh span{font-size:12.5px;color:#C9BFB4;display:flex;align-items:center;gap:6px}
+.wh div span::before{content:"";width:7px;height:7px;border-radius:50%;background:#5BD68A}
+.wh .x{margin-left:auto;font-size:22px;color:#C9BFB4;padding:2px 8px;border-radius:8px}.wh .x:hover{background:#2E2721;color:#fff}
+.wb{flex:1;overflow:auto;padding:18px 16px 8px;background:linear-gradient(#FFFDF9,#FBF7F1)}
+.m{margin:0 0 12px;display:flex}.m.u{justify-content:flex-end}
+.bub{max-width:84%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.5}
+.m.u .bub{background:var(--ink);color:#fff;border-bottom-right-radius:5px}
+.m.a .bub{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px}
+.bub p{margin:0 0 6px}.bub p:last-child{margin:0}.bub ul{margin:4px 0;padding-left:18px}
+.tool{font-size:12.5px;color:var(--muted);margin:2px 0 10px 4px;display:flex;align-items:center;gap:8px}
+.tool::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--copper);border-right-color:transparent;animation:sp .8s linear infinite}
+.tool.ok::before{border:0;content:"✓";color:var(--green);animation:none;font-weight:700}
+@keyframes sp{to{transform:rotate(360deg)}}
+.prods{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 10px;margin:0 -4px 6px;scroll-snap-type:x mandatory}
+.pc{flex:none;width:186px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;scroll-snap-align:start}
+.pc .art{aspect-ratio:1.6}.pc .art svg{width:40%;height:62%}
+.pc .c{padding:10px 12px 12px}.pc h4{margin:0 0 3px;font-size:13px;line-height:1.3;height:34px;overflow:hidden}
+.pc .row{font-size:13px}
+.pc .btns{display:flex;gap:6px;margin-top:9px}
+.pc .btns button{flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:9px;border:1px solid var(--line)}
+.pc .btns .add{background:var(--ink);color:#fff;border-color:var(--ink)}
+.order{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 12px;font-size:13px}
+.order .h{display:flex;justify-content:space-between;font-weight:600;margin-bottom:10px}
+.badge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:#EAF3EC;color:var(--green)}
+.badge.delayed{background:#FBEDE3;color:#A2531F}.badge.processing{background:#EEF0F6;color:#4B5675}
+.tl{display:flex;gap:4px;margin:8px 0 10px}.tl i{flex:1;height:5px;border-radius:5px;background:var(--line)}.tl i.on{background:var(--copper)}
+.order small{color:var(--muted);display:block;line-height:1.55}
+.note{font-size:12.5px;color:var(--green);background:#EAF3EC;border-radius:10px;padding:8px 12px;margin:0 0 12px}
+.qr{display:flex;flex-wrap:wrap;gap:7px;padding:0 16px 10px}
+.qr button{font-size:13px;padding:7px 12px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.qr button:hover{border-color:var(--copper);color:var(--copper)}
+.wi{border-top:1px solid var(--line);padding:12px;display:flex;gap:8px;align-items:center;background:#fff}
+.wi input{flex:1;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font:inherit;outline:0;background:var(--cream)}
+.wi input:focus{border-color:var(--copper2);background:#fff}
+.wi button{width:42px;height:42px;border-radius:12px;background:var(--copper);display:grid;place-items:center}
+.wi button svg{width:18px;height:18px}
+.pw{font-size:11px;color:#A79B8F;text-align:center;padding:0 0 8px;background:#fff}
+.caret{display:inline-block;width:7px;height:15px;background:var(--copper);vertical-align:-2px;border-radius:2px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-10px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:12px;font-size:13.5px;opacity:0;transition:.25s;z-index:40;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.hero-art{display:none}.widget{right:0;bottom:0;width:100%;height:100%;border-radius:0}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo"><i></i>Aerolume</div><a href="#">Espresso</a><a href="#">Grinders</a><a href="#">Pour-over</a><a href="#">Coffee</a><a href="#">Bundles</a>
+  <div class="cart">Cart <b id="cartn">0</b></div></div></header>
+<section class="hero">
+  <div><h1>Café-quality coffee, <em>at home.</em></h1>
+    <p>Espresso machines, grinders and pour-over gear we have tested ourselves, plus freshly roasted beans every Monday.</p>
+    <button class="cta" id="heroask">Not sure what to choose? Ask our expert →</button><button class="ghost">Shop bestsellers</button></div>
+  <div class="hero-art" id="heroart"></div>
+</section>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+<footer>Aerolume is a fictional store built to demonstrate an AI sales & support assistant. Products, prices and orders are sample data.</footer>
+
+<button class="launcher" id="launch"><span class="av" style="position:relative"></span><i class="ping"></i>Ask our coffee expert</button>
+<div class="widget" id="widget">
+  <div class="wh"><span class="av"></span><div><b>Aerolume Assistant</b><span>Online · replies in seconds</span></div><button class="x" id="close">×</button></div>
+  <div class="wb" id="wb"></div>
+  <div class="qr" id="qr">
+    <button>Help me choose an espresso setup under $1,000</button><button>Where is my order?</button><button>What is your return policy?</button><button>Gift ideas for a pour-over lover</button>
+  </div>
+  <div class="wi"><input id="in" placeholder="Type your question…" autocomplete="off"><button id="go" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+  <div class="pw">AI assistant · may make mistakes, order details are verified by email</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $=s=>document.querySelector(s); const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// line icons per category (64x64)
+const ICON={
+ 'espresso machines':'<rect x="12" y="8" width="40" height="40" rx="5"/><path d="M12 20h40M20 30h16M24 30v6M18 40h12M44 26v10"/><path d="M22 48v6h16v-6"/><circle cx="44" cy="14" r="2"/>',
+ 'grinders':'<path d="M22 8h20l-4 16H26z"/><rect x="20" y="24" width="24" height="26" rx="4"/><path d="M26 50v6h12v-6M32 32v8"/><circle cx="32" cy="36" r="5"/>',
+ 'kettles':'<path d="M18 26h26v20a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6z"/><path d="M44 32c6 0 8 4 8 8M18 34C10 30 8 20 4 16"/><path d="M26 26v-4a5 5 0 0 1 10 0v4"/>',
+ 'brewers':'<path d="M14 18h36L38 40H26z"/><path d="M22 40h20v4H22zM20 50h24"/><path d="M50 22c4 0 6 3 6 6s-2 6-6 6"/><path d="M26 24l3 8M38 24l-3 8"/>',
+ 'scales':'<rect x="8" y="30" width="48" height="16" rx="4"/><rect x="24" y="35" width="16" height="6" rx="1.5"/><path d="M14 30c0-8 8-14 18-14s18 6 18 14"/>',
+ 'coffee beans':'<path d="M18 10h28l4 44H14z"/><path d="M18 10l4 8h20l4-8"/><ellipse cx="32" cy="36" rx="7" ry="10"/><path d="M32 26c-3 6 3 14 0 20"/>',
+ 'accessories':'<path d="M18 16h24l-2 34a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4z"/><path d="M42 22h6a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-6M18 16l-6-4"/>',
+ 'bundles':'<rect x="10" y="24" width="44" height="30" rx="3"/><path d="M8 18h48v8H8zM32 18v36M32 18c-6-10-16-8-14-2s14 2 14 2c6-10 16-8 14-2s-14 2-14 2"/>'};
+const TONE={'espresso machines':'#E7D3BE','grinders':'#DCD3C6','kettles':'#D9E1DA','brewers':'#EADCCB','scales':'#DFDBD5','coffee beans':'#E5CDB5','accessories':'#E2DDD3','bundles':'#E8D6C7'};
+const art=(cat,stroke='#3B2E25')=>`<svg viewBox="0 0 64 64" fill="none" stroke="${stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICON[cat]||ICON.accessories}</svg>`;
+const AVSVG='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16M8 4c0 2 2 2 2 4M12 4c0 2 2 2 2 4"/></svg>';
+document.querySelectorAll('.av').forEach(a=>a.innerHTML=AVSVG);
+$('#heroart').innerHTML=[['espresso machines','Espresso from $219'],['grinders','Grinders from $129'],['kettles','Pour-over kettles'],['coffee beans','Fresh every Monday']].map(([c,l])=>`<div class="ha" style="background:${TONE[c]}">${art(c,'#4A2F1C')}<span>${l}</span></div>`).join('');
+let cart=0,CAT=[];
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e.t);e.t=setTimeout(()=>e.classList.remove('show'),2200)}
+function addCart(name){cart++;$('#cartn').textContent=cart;toast('Added to cart: '+name)}
+const stars=p=>`★ ${p.rating} <span style="color:#A79B8F">(${p.reviews})</span>`;
+fetch('/api/catalog').then(r=>r.json()).then(c=>{CAT=c;
+  const cats=['All',...new Set(c.map(p=>p.category))];
+  $('#chips').innerHTML=cats.map((x,i)=>`<button class="chip ${i?'':'on'}">${x[0].toUpperCase()+x.slice(1)}</button>`).join('');
+  render('All');
+  $('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));render(b.textContent)};
+});
+function render(cat){const list=CAT.filter(p=>cat==='All'||p.category.toLowerCase()===cat.toLowerCase());
+  $('#grid').innerHTML=list.map(p=>`<div class="card"><div class="art" style="background:${TONE[p.category]}">${art(p.category)}</div><div class="c"><div class="cat">${esc(p.category)}</div><h3>${esc(p.name)}</h3><div class="row"><span class="price">$${p.price}</span><span class="stars">${stars(p)}</span></div></div></div>`).join('')}
+
+// ---------------------------------------------------------------- chat
+const W=$('#widget'),wb=$('#wb'); let history=[],busy=false,session=Math.random().toString(36).slice(2);
+function open(){W.classList.add('open');$('#launch').style.display='none';if(!wb.children.length)greet();setTimeout(()=>$('#in').focus(),250)}
+$('#launch').onclick=open; $('#heroask').onclick=open; $('#close').onclick=()=>{W.classList.remove('open');$('#launch').style.display=''};
+function greet(){addBot('Hi! I\'m the Aerolume assistant. I can help you pick the right gear, track an order or answer questions about shipping and returns. What are you brewing at home?')}
+function md(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').split(/\n+/).map(l=>/^[-•*] /.test(l)?`<li>${l.slice(2)}</li>`:`<p>${l}</p>`).join('').replace(/(<li>.*?<\/li>)+/g,m=>`<ul>${m}</ul>`)}
+function addBot(t){const d=document.createElement('div');d.className='m a';d.innerHTML=`<div class="bub">${md(t)}</div>`;wb.appendChild(d);wb.scrollTop=wb.scrollHeight;return d}
+function prodCards(list){const d=document.createElement('div');d.className='prods';
+  d.innerHTML=list.map(p=>`<div class="pc"><div class="art" style="background:${TONE[p.category]}">${art(p.category)}</div><div class="c"><h4>${esc(p.name)}</h4><div class="row"><b>$${p.price}</b><span class="stars">★ ${p.rating}</span></div>
+    <div class="btns"><button class="det" data-n="${esc(p.name)}">Details</button><button class="add" data-n="${esc(p.name)}">Add to cart</button></div></div></div>`).join('');
+  d.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.classList.contains('add'))addCart(b.dataset.n);else send('Tell me more about the '+b.dataset.n)};
+  return d}
+function orderCard(o){const steps=['processing','shipped','delivered'];const idx=o.status==='delivered'?3:o.status==='processing'?1:2;
+  const d=document.createElement('div');d.className='order';
+  d.innerHTML=`<div class="h"><span>Order ${esc(o.order_id)}</span><span class="badge ${o.status}">${esc(o.status)}</span></div>
+   <div class="tl">${[1,2,3].map(i=>`<i class="${i<=idx?'on':''}"></i>`).join('')}</div>
+   <small>${esc(o.items.join(' · '))}</small>
+   <small>${o.carrier?esc(o.carrier)+' · '+esc(o.tracking)+'<br>':''}${o.status==='delivered'?'Delivered '+esc(o.delivered):'Estimated delivery: '+esc(o.eta)}</small>`;return d}
+async function send(text){
+  text=(text||'').trim(); if(!text||busy)return; busy=true; $('#qr').style.display='none';
+  const u=document.createElement('div');u.className='m u';u.innerHTML=`<div class="bub">${esc(text)}</div>`;wb.appendChild(u);
+  let toolEl=null,bot=null,acc='';
+  const tail=()=>{wb.scrollTop=wb.scrollHeight};
+  const typing=document.createElement('div');typing.className='tool';typing.textContent='Thinking…';wb.appendChild(typing);tail();
+  try{
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,history,session})});
+    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.detail||'Something went wrong')}
+    const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
+    while(true){const{value,done}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;
+      while((i=buf.indexOf('\n\n'))>=0){const blk=buf.slice(0,i);buf=buf.slice(i+2);
+        const ev=(blk.match(/^event: (.*)$/m)||[])[1],data=JSON.parse((blk.match(/^data: (.*)$/m)||[])[1]||'{}');
+        if(typing.parentNode)typing.remove();
+        if(ev==='tool'){if(toolEl)toolEl.classList.add('ok');toolEl=document.createElement('div');toolEl.className='tool';toolEl.textContent=data.label+'…';wb.appendChild(toolEl);bot=null;acc=''}
+        else if(ev==='products'){if(toolEl)toolEl.classList.add('ok');wb.appendChild(prodCards(data))}
+        else if(ev==='order'){if(toolEl)toolEl.classList.add('ok');wb.appendChild(orderCard(data))}
+        else if(ev==='notice'){if(toolEl)toolEl.classList.add('ok');const n=document.createElement('div');n.className='note';n.textContent=data.text;wb.appendChild(n)}
+        else if(ev==='token'){if(toolEl)toolEl.classList.add('ok');acc+=data.t;if(!bot)bot=addBot('');bot.querySelector('.bub').innerHTML=md(acc)+'<span class="caret"></span>'}
+        else if(ev==='error'){addBot(data.message)}
+        else if(ev==='done'){if(bot)bot.querySelector('.bub').innerHTML=md(acc);if(toolEl)toolEl.classList.add('ok')}
+        tail()}}
+    history.push({role:'user',content:text},{role:'assistant',content:acc});
+  }catch(e){if(typing.parentNode)typing.remove();addBot(e.message)}
+  busy=false;tail();
+}
+$('#go').onclick=()=>{send($('#in').value);$('#in').value=''};
+$('#in').onkeydown=e=>{if(e.key==='Enter'){send($('#in').value);$('#in').value=''}};
+$('#qr').onclick=e=>{const b=e.target.closest('button');if(b)send(b.textContent)};
+if(location.hash==='#chat')open();
+</script>
+</body>
+</html>
