@@ -183,7 +183,7 @@ async function send(text){
       while((i=buf.indexOf('\n\n'))>=0){const blk=buf.slice(0,i);buf=buf.slice(i+2);
         const ev=(blk.match(/^event: (.*)$/m)||[])[1],data=JSON.parse((blk.match(/^data: (.*)$/m)||[])[1]||'{}');
         if(typing.parentNode)typing.remove();
-        if(ev==='tool'){if(toolEl)toolEl.classList.add('ok');toolEl=document.createElement('div');toolEl.className='tool';toolEl.textContent=data.label+'…';wb.appendChild(toolEl);bot=null;acc=''}
+        if(ev==='tool'){if(toolEl&&toolEl.dataset.l===data.label&&toolEl===wb.lastElementChild){toolEl.classList.remove('ok')}else{if(toolEl)toolEl.classList.add('ok');toolEl=document.createElement('div');toolEl.className='tool';toolEl.dataset.l=data.label;toolEl.textContent=data.label+'…';wb.appendChild(toolEl)}bot=null;acc=''}
         else if(ev==='products'){if(toolEl)toolEl.classList.add('ok');wb.appendChild(prodCards(data))}
         else if(ev==='order'){if(toolEl)toolEl.classList.add('ok');wb.appendChild(orderCard(data))}
         else if(ev==='notice'){if(toolEl)toolEl.classList.add('ok');const n=document.createElement('div');n.className='note';n.textContent=data.text;wb.appendChild(n)}
