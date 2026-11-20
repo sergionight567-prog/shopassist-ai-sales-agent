@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+.pytest_cache/
+.ruff_cache/
+data/index/
+data/files/
+data/leads.json
+data/tickets.json
+data/conversations.jsonl
+out/

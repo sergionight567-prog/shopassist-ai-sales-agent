@@ -1,0 +1,6 @@
+{
+ "AL-20481":{"email":"maria.lopez@example.com","name":"Maria","placed":"2026-11-14","status":"shipped","carrier":"UPS","tracking":"1Z9W48E70391244873","eta":"2026-11-21","items":["Grindline 64 Flat Burr Grinder","Brew Scale with Timer"],"total":458},
+ "AL-20477":{"email":"j.chen@example.com","name":"James","placed":"2026-11-12","status":"delivered","delivered":"2026-11-17","items":["Pour-Over Starter Set"],"total":219},
+ "AL-20502":{"email":"anna.k@example.com","name":"Anna","placed":"2026-11-19","status":"processing","eta":"ships within 1 business day","items":["Lume One Espresso Machine","House Espresso Blend - 1 kg"],"total":691},
+ "AL-20455":{"email":"tom.b@example.com","name":"Tom","placed":"2026-11-08","status":"delayed","carrier":"DHL","tracking":"JD014600006288340512","eta":"2026-11-24","note":"held at the regional hub because of a weather disruption","items":["Lume Duo Dual-Boiler"],"total":1490}
+}
